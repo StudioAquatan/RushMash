@@ -22,6 +22,12 @@ var mockData: List<MockToDo> = listOf(
                 priority = 2,
                 category = 0),
         MockToDo(
+                id = 4,
+                name = "歯磨き",
+                duration = 5,
+                priority = 1,
+                category = 0),
+        MockToDo(
                 id = 2,
                 name = "シャワー",
                 duration = 20,
@@ -32,12 +38,6 @@ var mockData: List<MockToDo> = listOf(
                 name = "着替え",
                 duration = 5,
                 priority = 0,
-                category = 0),
-        MockToDo(
-                id = 4,
-                name = "歯磨き",
-                duration = 5,
-                priority = 1,
                 category = 0),
         MockToDo(
                 id = 5,
@@ -64,7 +64,6 @@ class Scheduler {
     fun optimizeSchedule(remineTime: Int, schedules: List<MockToDo>): List<MockToDo> {
         var durationSum: Int = 0
         schedules.map { durationSum += it.duration }
-        println(durationSum)
         if (remineTime >= durationSum) {
             return schedules
         }
@@ -129,6 +128,7 @@ class Scheduler {
                     cat++
                     tmp = 0
                 }
+                continue
             }
             sch.category = cat
         }
