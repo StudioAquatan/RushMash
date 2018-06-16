@@ -19,12 +19,12 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
         }
 
-        addListButton.setOnClickListener {
+        add_list_button.setOnClickListener {
             val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
         }
 
-        setAlarmButton.setOnClickListener {
+        set_alarm_button.setOnClickListener {
 
         }
     }

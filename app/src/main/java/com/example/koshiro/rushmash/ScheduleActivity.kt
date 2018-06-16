@@ -11,7 +11,7 @@ class ScheduleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_schedule)
         setSupportActionBar(schedule_toolbar)
 
-        stopMusicButton.setOnClickListener {
+        stop_music_Button.setOnClickListener {
 
         }
     }
