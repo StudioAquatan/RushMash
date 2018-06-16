@@ -5,62 +5,19 @@ import com.example.koshiro.rushmash.data.*
 import io.realm.Realm
 import io.realm.kotlin.where
 
-//var mockData: List<UserItem> = listOf(
-//        UserItem(
-//                id = 1,
-//                name = "朝食",
-//                duration = 15,
-//                priority = 2,
-//                category = 0),
-//        UserItem(
-//                id = 4,
-//                name = "歯磨き",
-//                duration = 5,
-//                priority = 1,
-//                category = 0),
-//        UserItem(
-//                id = 2,
-//                name = "シャワー",
-//                duration = 20,
-//                priority = 2,
-//                category = 0),
-//        UserItem(
-//                id = 3,
-//                name = "着替え",
-//                duration = 5,
-//                priority = 0,
-//                category = 0),
-//        UserItem(
-//                id = 5,
-//                name = "荷物用意",
-//                duration = 5,
-//                priority = 0,
-//                category = 0),
-//        UserItem(
-//                id = 6,
-//                name = "身支度",
-//                duration = 2,
-//                priority = 1,
-//                category = 0),
-//        UserItem(
-//                id = 7,
-//                name = "トイレ",
-//                duration = 3,
-//                priority = 2,
-//                category = 0)
-//)
-
 class Scheduler {
 
     private lateinit var realm: Realm
 
     fun optimizeSchedule(remineTime: Int): Boolean {
         realm = Realm.getDefaultInstance()
-        val results = realm.where<UserItem>().findAll()
+        val results = realm.where<UserItem>()
+                .equalTo("isDeleted", false)
+                .findAll()
+
         var durationSum: Int=0
-        for (r in results){
-            durationSum += r.duration
-        }
+        results.map { durationSum += it.duration }
+
         if (remineTime >= durationSum) {
             attachCategory()
             return true
@@ -70,12 +27,16 @@ class Scheduler {
         var forDeleteTime = durationSum - remineTime
 
         // PriorityがLowの中から削除
-        var lows = realm.where<UserItem>().equalTo("priority", 2.toInt()).findAll()
+        var lows = realm.where<UserItem>()
+                .equalTo("priority", 2.toInt())
+                .and()
+                .equalTo("isDeleted", false)
+                .findAll()
         var lowsSorted = lows.sortedBy { abs(forDeleteTime - it.duration) }
         for (l in lowsSorted) {
             forDeleteTime -= l.duration
             realm.executeTransaction{
-                l.deleteFromRealm()
+                l.isDeleted = true
             }
             if (forDeleteTime <= 0){
                 attachCategory()
@@ -84,12 +45,16 @@ class Scheduler {
         }
 
         // PriorityがMidの中から削除
-        var mids = realm.where<UserItem>().equalTo("priority", 1.toInt()).findAll()
+        var mids = realm.where<UserItem>()
+                .equalTo("priority", 1.toInt())
+                .and()
+                .equalTo("isDeleted", false)
+                .findAll()
         var midsSorted = mids.sortedBy { abs(forDeleteTime - it.duration) }
         for (m in midsSorted) {
             forDeleteTime -= m.duration
             realm.executeTransaction{
-                m.deleteFromRealm()
+                m.isDeleted = true
             }
             if (forDeleteTime <= 0) {
                 attachCategory()
@@ -102,11 +67,11 @@ class Scheduler {
     }
 
     fun attachCategory() {
-        val results = realm.where<UserItem>().findAll()
+        val results = realm.where<UserItem>()
+                .equalTo("isDeleted", false)
+                .findAll()
         var durationSum: Int=0
-        for (r in results){
-            durationSum += r.duration
-        }
+        results.map{ durationSum += it.duration }
         var categoryTime: Int = durationSum / 3
 
         var tmp: Int = 0
