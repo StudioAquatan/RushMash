@@ -37,6 +37,7 @@
         android:layout_height="60dp"
         android:background="#ed7d31"
         android:minHeight="60dp"
+        app:titleTextColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"

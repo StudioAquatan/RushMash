@@ -7,12 +7,17 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.koshiro.rushmash.data.UserItem
+import com.example.koshiro.rushmash.data.UserItemAdapter
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlin.concurrent.thread
 import io.realm.Realm
 import io.realm.kotlin.where
 
 class ScheduleActivity : AppCompatActivity() {
+
+    lateinit var realm: Realm
 
     private var player: MediaPlayer? = null
     private var firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
@@ -24,7 +29,13 @@ class ScheduleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule)
+        schedule_toolbar.setTitle("8:30までのスケジュール")
         setSupportActionBar(schedule_toolbar)
+
+        realm = Realm.getDefaultInstance()
+        val scheduledItems = realm.where<UserItem>().equalTo("isDeleted", false).findAll()
+        val userItemAdapter = UserItemAdapter(scheduledItems)
+        current_listview.adapter = userItemAdapter
 
         stop_music_Button.setOnClickListener {
             audioStop()
