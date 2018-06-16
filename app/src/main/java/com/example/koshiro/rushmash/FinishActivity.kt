@@ -1,8 +1,10 @@
 package com.example.koshiro.rushmash
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_finish.*
+
 
 class FinishActivity : AppCompatActivity() {
 
@@ -10,5 +12,15 @@ class FinishActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finish)
         setSupportActionBar(finish_toolbar)
+
+        finish_view.setOnClickListener {
+            val intent = Intent(this, AlarmActivity::class.java)
+            intent.putExtra("DEMO_SECOND_TIME", "8:15")
+            startActivity(intent)
+        }
+
     }
+
+
+
 }
