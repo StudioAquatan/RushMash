@@ -12,12 +12,8 @@ import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlin.concurrent.thread
-import io.realm.Realm
-import io.realm.kotlin.where
 
 class ScheduleActivity : AppCompatActivity() {
-
-    lateinit var realm: Realm
 
     private var player: MediaPlayer? = null
     private var firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
