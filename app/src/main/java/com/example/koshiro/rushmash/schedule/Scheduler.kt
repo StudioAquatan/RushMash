@@ -10,46 +10,52 @@ data class MockToDo(
         var id: Int,
         var name: String,
         var duration: Int,
-        var mockPriority: MockPriority,
+        var priority: Int,
         var category: Int
 )
 
 var mockData: MutableList<MockToDo> = mutableListOf(
         MockToDo(
                 id = 1,
-                name = "シャワー",
-                duration = 10,
-                mockPriority = MockPriority.High,
+                name = "朝食",
+                duration = 15,
+                priority = 2,
                 category = 0),
         MockToDo(
                 id = 2,
-                name = "歯磨き",
-                duration = 3,
-                mockPriority = MockPriority.Low,
+                name = "シャワー",
+                duration = 20,
+                priority = 1,
                 category = 0),
         MockToDo(
                 id = 3,
-                name = "髪セット",
+                name = "着替え",
                 duration = 5,
-                mockPriority = MockPriority.Low,
+                priority = 0,
                 category = 0),
         MockToDo(
                 id = 4,
-                name = "着替え",
-                duration = 3,
-                mockPriority = MockPriority.High,
+                name = "歯磨き",
+                duration = 5,
+                priority = 1,
                 category = 0),
         MockToDo(
                 id = 5,
-                name = "トイレ",
-                duration = 10,
-                mockPriority = MockPriority.Low,
+                name = "荷物用意",
+                duration = 5,
+                priority = 0,
                 category = 0),
         MockToDo(
                 id = 6,
-                name = "荷物用意",
-                duration = 5,
-                mockPriority = MockPriority.High,
+                name = "身支度",
+                duration = 2,
+                priority = 1,
+                category = 0),
+        MockToDo(
+                id = 7,
+                name = "トイレ",
+                duration = 3,
+                priority = 2,
                 category = 0)
 )
 
@@ -72,7 +78,7 @@ class Scheduler {
         var forDeleteTime = durationSum - remineTime
 
         // PriorityがLowの中から削除
-        var lows = schedules.filter { it.mockPriority == MockPriority.Low }
+        var lows = schedules.filter { it.priority == 2 }
         var lowsSorted = lows.sortedBy { abs(forDeleteTime - it.duration) }
         print("low sorted : ")
         println(lowsSorted)
@@ -85,7 +91,7 @@ class Scheduler {
         }
 
         // PriorityがMidの中から削除
-        var mids = schedules.filter { it.mockPriority == MockPriority.Mid }
+        var mids = schedules.filter { it.priority == 1 }
         var midsSorted = mids.sortedBy { abs(forDeleteTime - it.duration) }
         print("mid sorted : ")
         println(midsSorted)
