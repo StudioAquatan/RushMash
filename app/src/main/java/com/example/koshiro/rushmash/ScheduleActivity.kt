@@ -12,8 +12,6 @@ import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlin.concurrent.thread
-import io.realm.Realm
-import io.realm.kotlin.where
 
 class ScheduleActivity : AppCompatActivity() {
 
@@ -24,7 +22,6 @@ class ScheduleActivity : AppCompatActivity() {
     private var middlePeriodMsec: Long = 10 * 1000     //中盤の時間(msec)
     private var lastPeriodMsec: Long = 10 * 1000      //終盤の時間(msec)
     private var playerCreateFlag = true
-    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
