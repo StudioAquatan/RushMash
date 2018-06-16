@@ -13,8 +13,8 @@ class ScheduleActivity : AppCompatActivity() {
 
     private var player: MediaPlayer? = null
     private val firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
-    private val secondPeriodMsec: Long = 10 * 1000     //中盤の時間(msec)
-    private val thirdTimeMsec: Long = 10 * 1000      //終盤の時間(msec)
+    private val middlePeriodMsec: Long = 10 * 1000     //中盤の時間(msec)
+    private val lastPeriodMsec: Long = 10 * 1000      //終盤の時間(msec)
     private var playerCreateFlag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class ScheduleActivity : AppCompatActivity() {
             val intent = Intent(this, FinishActivity::class.java)
             startActivity(intent)
         }
-        playScheduleMusic(firstPeriodMsec, secondPeriodMsec, thirdTimeMsec)
+        playScheduleMusic(firstPeriodMsec, middlePeriodMsec, lastPeriodMsec)
     }
     private fun playScheduleMusic(firstMsec: Long, secondMsec: Long, thirdMsec: Long) {
         Log.d("test", "playScheduleMusic start")
