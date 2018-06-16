@@ -25,17 +25,71 @@ class MainActivity : AppCompatActivity() {
         main_toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
 
         realm = Realm.getDefaultInstance()
-//        realm.executeTransaction {
-//            realm.where<UserItem>().findAll().deleteAllFromRealm()
-//        }
+        realm.executeTransaction {
+            realm.where<UserItem>().findAll().deleteAllFromRealm()
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "朝食"
+            item.priority = 2
+            item.duration = 15
+            item.category = 0
+        }
         realm.executeTransaction {
             val maxId = realm.where<UserItem>().max("id")
             val nextId = (maxId?.toLong() ?: 0L) + 1
             val item = realm.createObject<UserItem>(nextId)
             item.name = "歯磨き"
+            item.priority = 1
+            item.duration = 5
+            item.category = 0
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "シャワー"
+            item.priority = 2
+            item.duration = 20
+            item.category = 0
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "着替え"
             item.priority = 0
-            item.duration = 1
-            item.category = 1
+            item.duration = 5
+            item.category = 0
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "荷物用意"
+            item.priority = 0
+            item.duration = 5
+            item.category = 0
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "身支度"
+            item.priority = 1
+            item.duration = 2
+            item.category = 0
+        }
+        realm.executeTransaction {
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "トイレ"
+            item.priority = 2
+            item.duration = 3
+            item.category = 0
         }
 
         val results = realm.where<UserItem>().findAll()
