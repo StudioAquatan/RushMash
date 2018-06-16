@@ -145,4 +145,11 @@ class ScheduleActivity : AppCompatActivity() {
             player = null
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        audioStop()
+        playerCreateFlag = false
+        realm.close()
+    }
 }
