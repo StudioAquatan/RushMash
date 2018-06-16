@@ -1,12 +1,15 @@
 package com.example.koshiro.rushmash
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_finish.*
 
 
 class FinishActivity : AppCompatActivity() {
+
+    private lateinit var player: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +22,7 @@ class FinishActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        player = MediaPlayer.create(this, R.raw.clear)
+        player.start()
     }
-
-
-
 }
