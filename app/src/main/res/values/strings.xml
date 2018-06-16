@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">RushMash</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="todolist">
+        <item>歯磨き</item>
+        <item>洗顔</item>
+        <item>シャワー</item>
+        <item>朝食</item>
+        <item>掃除</item>
+        <item>洗濯</item>
+        <item>着替え</item>
+        <item>メイク</item>
+        <item>髪セット</item>
+        <item>トイレ</item>
+    </string-array>
+
+    <string-array name="prioritylist">
+        <item>高</item>
+        <item>中</item>
+        <item>低</item>
+    </string-array>
 </resources>
