@@ -67,6 +67,7 @@ class Scheduler {
     }
 
     fun attachCategory() {
+        realm = Realm.getDefaultInstance()
         val results = realm.where<UserItem>()
                 .equalTo("isDeleted", false)
                 .findAll()
