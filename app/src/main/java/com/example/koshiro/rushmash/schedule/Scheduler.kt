@@ -10,7 +10,8 @@ data class MockToDo (
         var id: Int,
         var name: String,
         var duration: Int,
-        var mockPriority: MockPriority
+        var mockPriority: MockPriority,
+        var category: Int
 )
 
 class Scheduler {
@@ -59,5 +60,33 @@ class Scheduler {
 
         // PriorityがHighは削除しないので，forDeleteTimeが1以上であれば諦める
         return mutableListOf()
+    }
+
+    fun attachCategory(schedules: MutableList<MockToDo>): MutableList<MockToDo>{
+        var durationSum: Int = 0
+        schedules.map { durationSum += it.duration }
+        var categoryTime: Int = durationSum / 3
+
+        var tmp: Int = 0
+        var cat = 0
+        for (sch in schedules){
+            tmp += sch.duration
+            if (tmp >= categoryTime){
+                var diff1 = categoryTime - (tmp-sch.duration)
+                var diff2 = tmp - categoryTime
+                if (diff1 <= diff2){
+                    cat++
+                    sch.category = cat
+                    tmp = sch.duration
+                }else{
+                    sch.category = cat
+                    cat++
+                    tmp = 0
+                }
+            }
+            sch.category = cat
+        }
+
+        return schedules
     }
 }
