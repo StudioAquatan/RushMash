@@ -7,9 +7,12 @@ import android.widget.Toast
 import com.example.koshiro.rushmash.data.UserItem
 import com.example.koshiro.rushmash.data.UserItemAdapter
 import io.realm.Realm
+import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_setting.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,12 +25,29 @@ class MainActivity : AppCompatActivity() {
         main_toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
 
         realm = Realm.getDefaultInstance()
+//        realm.executeTransaction {
+//            realm.where<UserItem>().findAll().deleteAllFromRealm()
+//        }
         realm.executeTransaction {
-            realm.where<UserItem>().findAll().deleteAllFromRealm()
+            val maxId = realm.where<UserItem>().max("id")
+            val nextId = (maxId?.toLong() ?: 0L) + 1
+            val item = realm.createObject<UserItem>(nextId)
+            item.name = "歯磨き"
+            item.priority = 0
+            item.duration = 1
+            item.category = 1
         }
 
         val results = realm.where<UserItem>().findAll()
         original_listview.adapter = UserItemAdapter(results)
+
+        original_listview.setOnItemClickListener {
+            parent, view, position, id ->
+                val userItem = parent.getItemAtPosition(position) as UserItem
+                startActivity<SettingActivity>(
+                        "item_id" to userItem.id
+                )
+        }
 
         main_toolbar.setNavigationOnClickListener {
             Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()

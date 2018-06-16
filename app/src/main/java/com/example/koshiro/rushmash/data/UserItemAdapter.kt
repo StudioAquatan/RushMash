@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.example.koshiro.rushmash.R
 import io.realm.OrderedRealmCollection
 import io.realm.RealmBaseAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 
 class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapter<UserItem>(data) {
     inner class ViewHolder(cell: View) {
@@ -31,6 +30,7 @@ class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapte
                 view.tag = viewHolder
             }
             else -> {
+                Log.i("UserItemAdapter.getView", "else")
                 view = convertView
                 viewHolder = view.tag as ViewHolder
             }
@@ -42,9 +42,12 @@ class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapte
             viewHolder.name.text = userItem.name
             val duration = userItem.duration.toString() + "分"
             viewHolder.duration.text = duration
-//            if (position == 0) {
-//                convertView?.setBackgroundColor(Color.rgb(127, 127, 255))
-//            }
+            if (userItem.category == 0) {
+                view.setBackgroundColor(Color.rgb(127, 127, 255))
+            }
+            if (userItem.category == 1) {
+                view.setBackgroundColor(Color.rgb(127, 127, 127))
+            }
         }
         return view
     }
