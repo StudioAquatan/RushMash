@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.example.koshiro.rushmash.data.UserItem
 import com.example.koshiro.rushmash.data.UserItemAdapter
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
@@ -24,9 +23,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(main_toolbar)
         main_toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
 
-        val config = RealmConfiguration.Builder().schemaVersion(1).build()
 
-        realm = Realm.getInstance(config)
+        realm = Realm.getDefaultInstance()
 //        realm.executeTransaction {
 //            realm.where<UserItem>().findAll().deleteAllFromRealm()
 //        }

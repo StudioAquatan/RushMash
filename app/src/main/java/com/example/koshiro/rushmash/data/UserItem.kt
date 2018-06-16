@@ -17,6 +17,7 @@ open class UserItem: RealmObject() {
     var priority: Int = Priority.MID.ordinal
     var order = 0
     var category = 0
+    var isDeleted = false
 }
 
 

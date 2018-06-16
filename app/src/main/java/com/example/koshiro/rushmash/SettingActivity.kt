@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import com.example.koshiro.rushmash.data.UserItem
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -20,8 +19,7 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        val config = RealmConfiguration.Builder().schemaVersion(1).build()
-        realm = Realm.getInstance(config)
+        realm = Realm.getDefaultInstance()
 
         val itemId = intent?.getLongExtra("item_id", -1L)
         if (itemId != -1L) {
