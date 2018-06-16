@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.example.koshiro.rushmash.data.UserItem
 import com.example.koshiro.rushmash.data.UserItemAdapter
+import com.example.koshiro.rushmash.schedule.Scheduler
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
@@ -91,6 +92,9 @@ class MainActivity : AppCompatActivity() {
             item.duration = 3
             item.category = 0
         }
+
+        val sch = Scheduler()
+        sch.attachCategory()
 
         val results = realm.where<UserItem>().findAll()
         original_listview.adapter = UserItemAdapter(results)
