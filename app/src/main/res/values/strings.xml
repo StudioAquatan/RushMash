@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RushMash</string>
     <string name="action_settings">Settings</string>
+    <string name="duration_unit_minute">分</string>
 
     <string-array name="todolist">
         <item>歯磨き</item>
