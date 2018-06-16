@@ -98,28 +98,63 @@
         app:layout_constraintTop_toBottomOf="@+id/time_textview"
         />
 
-    <ImageView
-        android:id="@+id/save_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="56dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="#00b050"
+        android:layout_marginStart="16dp"
+        android:text="キャンセル"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_save" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/delete_button"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/colorWarning"
+        android:text="削除"
+        android:textColor="?attr/colorBackgroundFloating"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/save_button"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="保存"
+        android:textColor="?attr/colorBackgroundFloating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <!--<ImageView-->
+        <!--android:id="@+id/save_button"-->
+        <!--android:layout_width="55dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginEnd="56dp"-->
+        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+        <!--android:tint="#00b050"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:srcCompat="@android:drawable/ic_menu_save" />-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/delete_button"-->
+        <!--android:layout_width="55dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginStart="56dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:srcCompat="@android:drawable/ic_delete"-->
+        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+        <!--/>-->
 
 </android.support.constraint.ConstraintLayout>

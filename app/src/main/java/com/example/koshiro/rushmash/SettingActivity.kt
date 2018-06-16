@@ -2,6 +2,7 @@ package com.example.koshiro.rushmash
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import com.example.koshiro.rushmash.data.UserItem
 import io.realm.Realm
@@ -27,6 +28,9 @@ class SettingActivity : AppCompatActivity() {
             plan_spinner.setSelection(todolist.indexOf(userItem.name))
             priority_spinner.setSelection(userItem.priority)
             time_editview.setText(userItem.duration.toString(), TextView.BufferType.EDITABLE)
+            delete_button.visibility = View.VISIBLE
+        } else {
+            delete_button.visibility = View.INVISIBLE
         }
 
         save_button.setOnClickListener {
@@ -58,7 +62,15 @@ class SettingActivity : AppCompatActivity() {
             }
         }
         delete_button.setOnClickListener {
-
+            realm.executeTransaction {
+                realm.where<UserItem>().equalTo("id", itemId).findFirst()!!.deleteFromRealm()
+            }
+            alert("削除しました") {
+                yesButton { finish() }
+            }.show()
+        }
+        cancel_button.setOnClickListener {
+            finish()
         }
     }
 
