@@ -105,24 +105,29 @@ class Scheduler {
         var categoryTime: Int = durationSum / 3
 
         var tmp: Int = 0
-        var cat = 0
+        var cat: Int = 0
         for (sch in schedules) {
+
+            // categoryの値は2から先が無いので全部2
+            if (cat == 2) {
+                sch.category = cat
+                continue
+            }
+
             tmp += sch.duration
             if (tmp >= categoryTime) {
+                // 足す前
                 var diff1 = categoryTime - (tmp - sch.duration)
+                // 足した後
                 var diff2 = tmp - categoryTime
-                if (cat == 2){
+                if (diff1 <= diff2) {
+                    cat++
                     sch.category = cat
-                }else{
-                    if (diff1 <= diff2) {
-                        cat++
-                        sch.category = cat
-                        tmp = sch.duration
-                    } else {
-                        sch.category = cat
-                        cat++
-                        tmp = 0
-                    }
+                    tmp = sch.duration
+                } else {
+                    sch.category = cat
+                    cat++
+                    tmp = 0
                 }
             }
             sch.category = cat
