@@ -6,16 +6,20 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.koshiro.rushmash.data.UserItem
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlin.concurrent.thread
+import io.realm.Realm
+import io.realm.kotlin.where
 
 class ScheduleActivity : AppCompatActivity() {
 
     private var player: MediaPlayer? = null
-    private val firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
-    private val middlePeriodMsec: Long = 10 * 1000     //中盤の時間(msec)
-    private val lastPeriodMsec: Long = 10 * 1000      //終盤の時間(msec)
+    private var firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
+    private var middlePeriodMsec: Long = 10 * 1000     //中盤の時間(msec)
+    private var lastPeriodMsec: Long = 10 * 1000      //終盤の時間(msec)
     private var playerCreateFlag = true
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,37 @@ class ScheduleActivity : AppCompatActivity() {
             val intent = Intent(this, FinishActivity::class.java)
             startActivity(intent)
         }
+
+        realm = Realm.getDefaultInstance()
+
+        val firsts = realm.where<UserItem>()
+                .equalTo("isDeleted", false)
+                .and()
+                .equalTo("category", 0.toInt())
+                .findAll()
+        firstPeriodMsec = 0
+        firsts.map { firstPeriodMsec += it.duration*60*1000 }
+
+        val middles = realm.where<UserItem>()
+                .equalTo("isDeleted", false)
+                .and()
+                .equalTo("category", 1.toInt())
+                .findAll()
+        middlePeriodMsec = 0
+        middles.map { middlePeriodMsec += it.duration*60*1000 }
+
+        val lasts = realm.where<UserItem>()
+                .equalTo("isDeleted", false)
+                .and()
+                .equalTo("category", 2.toInt())
+                .findAll()
+        lastPeriodMsec = 0
+        lasts.map { lastPeriodMsec += it.duration*60*1000 }
+
+        println("first: $firstPeriodMsec ms")
+        println("middle: $middlePeriodMsec ms")
+        println("last: $lastPeriodMsec ms")
+
         playScheduleMusic(firstPeriodMsec, middlePeriodMsec, lastPeriodMsec)
     }
     private fun playScheduleMusic(firstMsec: Long, secondMsec: Long, thirdMsec: Long) {
