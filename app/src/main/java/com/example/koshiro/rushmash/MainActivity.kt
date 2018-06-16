@@ -20,12 +20,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         add_list_button.setOnClickListener {
-            val intent = Intent(this, ScheduleActivity::class.java)
+            val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
 
-        set_alarm_button.setOnClickListener {
-
+        start_button.setOnClickListener {
+            val intent = Intent(this, AlarmActivity::class.java)
+            startActivity(intent)
         }
     }
 
