@@ -9,10 +9,10 @@ import android.widget.TextView
 import com.example.koshiro.rushmash.R
 import io.realm.OrderedRealmCollection
 import io.realm.RealmBaseAdapter
+import org.jetbrains.anko.childrenSequence
 
 class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapter<UserItem>(data) {
     inner class ViewHolder(cell: View) {
-        // TODO: 項目のid入れる
         val name = cell.findViewById<TextView>(R.id.todo_textview)
         val duration = cell.findViewById<TextView>(R.id.time_textview)
     }
@@ -43,10 +43,13 @@ class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapte
             val duration = userItem.duration.toString() + "分"
             viewHolder.duration.text = duration
             if (userItem.category == 0) {
-                view.setBackgroundColor(Color.rgb(127, 127, 255))
+                view.childrenSequence().first().setBackgroundColor(Color.parseColor("#47b8e0"))
             }
             if (userItem.category == 1) {
-                view.setBackgroundColor(Color.rgb(127, 127, 127))
+                view.childrenSequence().first().setBackgroundColor(Color.parseColor("#ffc952"))
+            }
+            if (userItem.category == 2) {
+                view.childrenSequence().first().setBackgroundColor(Color.parseColor("#ff7473"))
             }
         }
         return view
