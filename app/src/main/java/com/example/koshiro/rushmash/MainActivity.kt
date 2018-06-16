@@ -11,7 +11,6 @@ import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar)
         main_toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+
 
         realm = Realm.getDefaultInstance()
         realm.executeTransaction {
