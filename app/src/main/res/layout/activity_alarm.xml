@@ -24,7 +24,7 @@
         android:layout_height="133dp"
         android:layout_marginTop="72dp"
         android:gravity="center"
-        android:text="8:00"
+        android:text="7:00"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"

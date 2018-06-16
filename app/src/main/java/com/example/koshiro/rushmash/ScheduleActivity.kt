@@ -15,8 +15,6 @@ import kotlin.concurrent.thread
 
 class ScheduleActivity : AppCompatActivity() {
 
-    lateinit var realm: Realm
-
     private var player: MediaPlayer? = null
     private var firstPeriodMsec: Long = 10 * 1000     //序盤の時間(msec) なんらかの方法で取得
     private var middlePeriodMsec: Long = 10 * 1000     //中盤の時間(msec)

@@ -15,13 +15,17 @@ class AlarmActivity : AppCompatActivity() {
         private var qikokuFlag: Boolean = false
     }
     private var player: MediaPlayer? = null
+    private var late_time: Int = 90
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
-        if (intent.getStringExtra("DEMO_SECOND_TIME") != null) {
-            time_textview.text = intent.getStringExtra("DEMO_SECOND_TIME")
+        if (intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY") != null) {
+            time_textview.text = intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY")
+        }
+        if (intent.getIntExtra("DEMO_SECOND_TIME_DEMOTIME", 0) != 0) {
+            late_time = intent.getIntExtra("DEMO_SECOND_TIME_DEMOTIME", 0)
         }
 
         stop_alarm_button.setOnClickListener {
@@ -32,7 +36,8 @@ class AlarmActivity : AppCompatActivity() {
             最適化に成功したらtrue，失敗したらfalseを返す
              */
             val scheduler = Scheduler()
-            scheduler.optimizeSchedule(30)
+            scheduler.optimizeSchedule(late_time)
+            Log.d("late_time", "late_time is $late_time")
             val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
         }

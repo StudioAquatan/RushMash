@@ -15,7 +15,8 @@ class FinishActivity : AppCompatActivity() {
 
         finish_view.setOnClickListener {
             val intent = Intent(this, AlarmActivity::class.java)
-            intent.putExtra("DEMO_SECOND_TIME", "8:15")
+            intent.putExtra("DEMO_SECOND_TIME_DISPLAY", "8:00")
+            intent.putExtra("DEMO_SECOND_TIME_DEMOTIME", 30)
             startActivity(intent)
         }
 
