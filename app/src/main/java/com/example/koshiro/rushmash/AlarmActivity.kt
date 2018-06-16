@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_alarm.*
 
+import com.example.koshiro.rushmash.schedule.*
+
 class AlarmActivity : AppCompatActivity() {
 
     companion object {
@@ -23,7 +25,14 @@ class AlarmActivity : AppCompatActivity() {
         }
 
         stop_alarm_button.setOnClickListener {
+            // 再生を止める
             audioStop()
+            /*
+            optimizeScheduleの引数には残りの時間(分)をIntで渡す
+            最適化に成功したらtrue，失敗したらfalseを返す
+             */
+            val scheduler = Scheduler()
+            scheduler.optimizeSchedule(30)
             val intent = Intent(this, ScheduleActivity::class.java)
             startActivity(intent)
         }
