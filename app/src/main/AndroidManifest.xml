@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".FinishActivity"></activity>
+        <activity android:name=".FinishActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
