@@ -14,6 +14,7 @@ class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapte
     inner class ViewHolder(cell: View) {
         val name = cell.findViewById<TextView>(R.id.todo_textview)
         val duration = cell.findViewById<TextView>(R.id.time_textview)
+        val priority = cell.findViewById<TextView>(R.id.priority_textview)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -38,6 +39,18 @@ class UserItemAdapter(data: OrderedRealmCollection<UserItem>?) : RealmBaseAdapte
             viewHolder.name.text = userItem.name
             val duration = userItem.duration.toString() + "分"
             viewHolder.duration.text = duration
+            if (userItem.priority == 0) {
+                viewHolder.priority.text = "高"
+//                viewHolder.priority.setTextColor(Color.parseColor("#47b8e0"))
+            }
+            if (userItem.priority == 1) {
+                viewHolder.priority.text = "中"
+//                viewHolder.priority.setTextColor(Color.parseColor("#ffc952"))
+            }
+            if (userItem.priority == 2) {
+                viewHolder.priority.text = "低"
+//                viewHolder.priority.setTextColor(Color.parseColor("#ff7473"))
+            }
             if (userItem.category == 0) {
                 view.childrenSequence().first().setBackgroundColor(Color.parseColor("#47b8e0"))
             }

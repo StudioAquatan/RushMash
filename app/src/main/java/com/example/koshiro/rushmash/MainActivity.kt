@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_toolbar.setNavigationOnClickListener {
-            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Thank you for using!", Toast.LENGTH_SHORT).show()
         }
 
         add_list_button.setOnClickListener {
