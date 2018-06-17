@@ -25,7 +25,7 @@ class ScheduleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule)
-        schedule_toolbar.setTitle("8:30までのスケジュール")
+        schedule_toolbar.title = "To Do - 8:30"
         setSupportActionBar(schedule_toolbar)
 
         realm = Realm.getDefaultInstance()
