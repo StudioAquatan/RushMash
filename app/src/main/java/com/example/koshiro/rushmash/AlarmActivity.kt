@@ -69,5 +69,6 @@ class AlarmActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         audioStop()
+        qikokuFlag = !qikokuFlag
     }
 }
