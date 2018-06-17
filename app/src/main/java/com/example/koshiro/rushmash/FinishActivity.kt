@@ -17,7 +17,7 @@ class FinishActivity : AppCompatActivity() {
         finish_toolbar.title = "SUCCESS!!"
         setSupportActionBar(finish_toolbar)
 
-        finish_view.setOnClickListener {
+        finish_button.setOnClickListener {
             val intent = Intent(this, AlarmActivity::class.java)
             intent.putExtra("DEMO_SECOND_TIME_DISPLAY", "8:00")
             intent.putExtra("DEMO_SECOND_TIME_DEMOTIME", 30)

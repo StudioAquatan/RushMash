@@ -24,6 +24,7 @@ class AlarmActivity : AppCompatActivity() {
 
         if (intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY") != null) {
             time_textview.text = intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY")
+            time_textview.setTextColor(resources.getColor(R.color.lastColor, theme))
         }
         if (intent.getIntExtra("DEMO_SECOND_TIME_DEMOTIME", 0) != 0) {
             late_time = intent.getIntExtra("DEMO_SECOND_TIME_DEMOTIME", 0)

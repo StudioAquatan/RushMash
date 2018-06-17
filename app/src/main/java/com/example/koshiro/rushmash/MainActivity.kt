@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar)
-        main_toolbar.setNavigationIcon(R.drawable.ic_launcher_foreground)
+        main_toolbar.setNavigationIcon(R.drawable.ic_icon_rm)
 
 
         realm = Realm.getDefaultInstance()
