@@ -19,8 +19,8 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        alarm_toolbar.title = "おはようございます"
         setContentView(R.layout.activity_alarm)
+        alarm_toolbar.title = "おはようございます"
 
         if (intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY") != null) {
             time_textview.text = intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY")
