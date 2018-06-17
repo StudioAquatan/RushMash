@@ -39,7 +39,7 @@ class Scheduler {
                 l.isDeleted = true
             }
             if (forDeleteTime <= 0){
-                attachCategory()
+                attachCategory(true)
                 return true
             }
         }
@@ -57,7 +57,7 @@ class Scheduler {
                 m.isDeleted = true
             }
             if (forDeleteTime <= 0) {
-                attachCategory()
+                attachCategory(true)
                 return true
             }
         }
@@ -66,7 +66,7 @@ class Scheduler {
         return false
     }
 
-    fun attachCategory() {
+    fun attachCategory(isOverslept: Boolean = false) {
         realm = Realm.getDefaultInstance()
         val results = realm.where<UserItem>()
                 .equalTo("isDeleted", false)
@@ -77,6 +77,10 @@ class Scheduler {
 
         var tmp: Int = 0
         var cat: Int = 0
+        if (isOverslept){
+            cat = 1
+            categoryTime = durationSum / 2
+        }
         for (r in results) {
 
             // categoryの値は2から先が無いので全部2
