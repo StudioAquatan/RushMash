@@ -19,6 +19,7 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        alarm_toolbar.title = "おはようございます"
         setContentView(R.layout.activity_alarm)
 
         if (intent.getStringExtra("DEMO_SECOND_TIME_DISPLAY") != null) {
@@ -63,5 +64,11 @@ class AlarmActivity : AppCompatActivity() {
             }
             player = null
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        audioStop()
+        qikokuFlag = !qikokuFlag
     }
 }

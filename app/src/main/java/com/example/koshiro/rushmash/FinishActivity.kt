@@ -14,6 +14,7 @@ class FinishActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finish)
+        finish_toolbar.title = "SUCCESS!!"
         setSupportActionBar(finish_toolbar)
 
         finish_view.setOnClickListener {
@@ -25,5 +26,17 @@ class FinishActivity : AppCompatActivity() {
 
         player = MediaPlayer.create(this, R.raw.clear)
         player.start()
+    }
+    fun audioStop() {
+        player.apply {
+            this.stop()
+            reset()
+            release()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        audioStop()
     }
 }
